@@ -1,0 +1,34 @@
+{
+  "buildOptions": {
+    "debugType": "portable",
+  },
+
+  "dependencies": {
+    "System.ComponentModel.Annotations": "4.1.0",
+    "Invio.Validation": {
+      "target": "project"
+    },
+    "Invio.Xunit": "0.1.1",
+    "dotnet-test-xunit": "2.2.0-*",
+    "xunit": "2.2.0-*"
+  },
+
+  "testRunner": "xunit",
+
+  "frameworks": {
+    "netcoreapp1.0": {
+      "dependencies": {
+        "Microsoft.NETCore.App": {
+          "version": "1.0.0",
+          "type": "platform"
+        }
+      },
+      "imports": [
+        "dotnet5.4",
+        "portable-net451+win8"
+      ]
+    },
+    "net46": {}
+  }
+
+}
