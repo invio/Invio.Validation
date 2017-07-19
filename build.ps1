@@ -50,8 +50,6 @@ function Exec
 
 if(Test-Path .\artifacts) { Remove-Item .\artifacts -Force -Recurse }
 
-EnsurePsbuildInstalled
-
 exec { & dotnet restore }
 
 exec { & dotnet build .\src\Invio.Validation }
