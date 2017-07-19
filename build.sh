@@ -17,7 +17,7 @@ dotnet restore
 dotnet test ./test/Invio.Validation.Tests -c Release -f netcoreapp1.1
 
 # Instead, run directly with mono for the full .net version
-dotnet build ./test/Invio.Validation.Tests -c Release -f net46
+dotnet build ./test/Invio.Validation.Tests -c Release -f net461
 
 mono \
 ./test/Invio.Validation.Tests/bin/Release/net46/*/dotnet-test-xunit.exe \
