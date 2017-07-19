@@ -50,6 +50,8 @@ function Exec
 
 if(Test-Path .\artifacts) { Remove-Item .\artifacts -Force -Recurse }
 
+dotnet --version
+
 exec { & dotnet restore }
 
 exec { & dotnet build .\src\Invio.Validation }
