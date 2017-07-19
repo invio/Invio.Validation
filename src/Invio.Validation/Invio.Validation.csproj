@@ -1,0 +1,24 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <AssemblyTitle>Invio implementations for managing Validations in dotnet</AssemblyTitle>
+    <VersionPrefix>0.0.1</VersionPrefix>
+    <Authors>Saqib Rokadia &lt;saqib@invioinc.com&gt;;Brian Caruso &lt;brian@invioinc.com&gt;</Authors>
+    <TargetFramework>netstandard1.3</TargetFramework>
+    <DebugType>portable</DebugType>
+    <AssemblyName>Invio.Validation</AssemblyName>
+    <PackageId>Invio.Validation</PackageId>
+    <PackageTags>validation</PackageTags>
+    <PackageProjectUrl>https://github.com/invio/Invio.Validation/</PackageProjectUrl>
+    <PackageLicenseUrl>https://github.com/invio/Invio.Validation/blob/master/LICENSE.txt</PackageLicenseUrl>
+    <RepositoryType>git</RepositoryType>
+    <RepositoryUrl>git@github.com:invio/Invio.Validation</RepositoryUrl>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.Collections.Immutable" Version="1.3.0" />
+    <PackageReference Include="System.ComponentModel.Annotations" Version="4.1.0" />
+    <PackageReference Include="System.Reflection.TypeExtensions" Version="4.1.0" />
+  </ItemGroup>
+
+</Project>

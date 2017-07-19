@@ -14,16 +14,6 @@ dotnet restore
 # Ideally we would use the 'dotnet test' command to test netcoreapp and net46 so restrict for now
 # but this currently doesn't work due to https://github.com/dotnet/cli/issues/3073 so restrict to netcoreapp
 
-dotnet test ./test/Invio.Validation.Tests -c Release -f netcoreapp1.1
+dotnet test ./test/Invio.Validation.Tests/Invio.Validation.Tests.csproj -c Release -f netcoreapp1.1
 
-# Instead, run directly with mono for the full .net version
-dotnet build ./test/Invio.Validation.Tests -c Release -f net461
-
-mono \
-./test/Invio.Validation.Tests/bin/Release/net46/*/dotnet-test-xunit.exe \
-./test/Invio.Validation.Tests/bin/Release/net46/*/Invio.Validation.Tests.dll
-
-revision=${TRAVIS_JOB_ID:=1}
-revision=$(printf "%04d" $revision)
-
-dotnet pack ./src/Invio.Validation -c Release -o ./artifacts
+dotnet pack ./src/Invio.Validation -c Release -o ../../artifacts
