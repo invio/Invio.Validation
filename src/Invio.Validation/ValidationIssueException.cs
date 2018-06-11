@@ -2,12 +2,23 @@ using System;
 using System.Collections.Immutable;
 
 namespace Invio.Validation {
+
     public class ValidationIssueException : OperationResultException {
 
         public ValidationIssueException(ValidationIssue validationIssue)
-            : base(ImmutableHashSet.Create(validationIssue)) { }
+            : base(ToSet(validationIssue)) { }
 
         public ValidationIssueException(ValidationIssue validationIssue, Exception innerException)
-            : base(ImmutableHashSet.Create(validationIssue), innerException) { }
+            : base(ToSet(validationIssue), innerException) { }
+
+        private static ImmutableHashSet<ValidationIssue> ToSet(ValidationIssue issue) {
+            if (issue == null) {
+                throw new ArgumentNullException(nameof(issue));
+            }
+
+            return ImmutableHashSet.Create<ValidationIssue>(issue);
+        }
+
     }
+
 }

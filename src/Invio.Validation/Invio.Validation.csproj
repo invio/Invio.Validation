@@ -4,7 +4,7 @@
     <AssemblyTitle>Invio implementations for managing Validations in dotnet</AssemblyTitle>
     <VersionPrefix>0.1.3</VersionPrefix>
     <Authors>Invio Inc. &lt;developers@invioinc.com&gt;</Authors>
-    <TargetFramework>netstandard1.3</TargetFramework>
+    <TargetFramework>netstandard2.0</TargetFramework>
     <DebugType>portable</DebugType>
     <AssemblyName>Invio.Validation</AssemblyName>
     <PackageId>Invio.Validation</PackageId>
@@ -16,10 +16,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Invio.Immutable" Version="0.4.0" />
-    <PackageReference Include="System.Collections.Immutable" Version="1.4.0" />
-    <PackageReference Include="System.ComponentModel.Annotations" Version="4.4.1" />
-    <PackageReference Include="System.Reflection.TypeExtensions" Version="4.4.0" />
+    <PackageReference Include="Invio.Immutable" Version="0.4.1" />
+    <PackageReference Include="System.Collections.Immutable" Version="1.5.0" />
+    <PackageReference Include="System.ComponentModel.Annotations" Version="4.5.0" />
+    <PackageReference Include="System.Reflection.TypeExtensions" Version="4.5.0" />
   </ItemGroup>
 
 </Project>

@@ -12,10 +12,14 @@ namespace Invio.Validation {
         [Fact]
         public void Constructor_NullValidationIssue() {
 
+            // Arrange
+
+            ValidationIssue issue = null;
+
             // Act
 
             var exception = Record.Exception(
-                () => new ValidationIssueException((ValidationIssue) null)
+                () => new ValidationIssueException(issue)
             );
 
             // Assert
