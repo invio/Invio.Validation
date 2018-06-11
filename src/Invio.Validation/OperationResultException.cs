@@ -8,7 +8,7 @@ namespace Invio.Validation {
         public OperationResultBase OperationResult { get; }
 
         public OperationResultException(ISet<ValidationIssue> validationIssues)
-            : base(BuildValiationIssuesMessage(validationIssues)) {
+            : base(BuildValidationIssuesMessage(validationIssues)) {
             if (validationIssues == null) {
                 throw new ArgumentNullException(nameof(validationIssues));
             }
@@ -18,7 +18,7 @@ namespace Invio.Validation {
 
 
         public OperationResultException(ISet<ValidationIssue> validationIssues, Exception innerException)
-            : base(BuildValiationIssuesMessage(validationIssues), innerException) {
+            : base(BuildValidationIssuesMessage(validationIssues), innerException) {
             if (validationIssues == null) {
                 throw new ArgumentNullException(nameof(validationIssues));
             }
@@ -27,7 +27,7 @@ namespace Invio.Validation {
         }
 
         public OperationResultException(OperationResultBase operationResult)
-            : base(BuildValiationIssuesMessage(operationResult)) {
+            : base(BuildValidationIssuesMessage(operationResult)) {
             if (operationResult == null) {
                 throw new ArgumentNullException(nameof(operationResult));
             }
@@ -36,7 +36,7 @@ namespace Invio.Validation {
         }
 
         public OperationResultException(OperationResultBase operationResult, Exception innerException)
-            : base(BuildValiationIssuesMessage(operationResult), innerException) {
+            : base(BuildValidationIssuesMessage(operationResult), innerException) {
             if (operationResult == null) {
                 throw new ArgumentNullException(nameof(operationResult));
             }
@@ -44,16 +44,16 @@ namespace Invio.Validation {
             this.OperationResult = operationResult;
         }
 
-        private static String BuildValiationIssuesMessage(
+        private static String BuildValidationIssuesMessage(
             OperationResultBase operationResult) {
             if (operationResult == null) {
                 throw new ArgumentNullException(nameof(operationResult));
             }
 
-            return BuildValiationIssuesMessage(operationResult.ValidationIssues);
+            return BuildValidationIssuesMessage(operationResult.ValidationIssues);
         }
 
-        private static String BuildValiationIssuesMessage(
+        private static String BuildValidationIssuesMessage(
             ISet<ValidationIssue> validationIssues) {
             if (validationIssues == null) {
                 throw new ArgumentNullException(nameof(validationIssues));
