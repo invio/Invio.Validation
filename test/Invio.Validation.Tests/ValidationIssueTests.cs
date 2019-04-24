@@ -39,17 +39,59 @@ namespace Invio.Validation {
         }
 
         [Fact]
+        public void Warning_WithJustCode() {
+
+            // Arrange
+
+            var message = "FooBar";
+            var code = "some-code";
+
+            // Act
+
+            var warning = ValidationIssue.Warning(message, code);
+
+            // Assert
+
+            Assert.Equal(message, warning.Message);
+            Assert.Equal(ValidationIssueLevel.Warning, warning.Level);
+            Assert.Equal(code, warning.Code);
+            Assert.Null(warning.MemberNames);
+        }
+
+        [Fact]
+        public void Warning_WithJustMemberNames() {
+
+            // Arrange
+
+            var message = "FooBar";
+            var memberNames = ImmutableHashSet.Create("foo", "bar");
+
+            // Act
+
+            var warning = ValidationIssue.Warning(message, memberNames);
+
+            // Assert
+
+            Assert.Equal(message, warning.Message);
+            Assert.Equal(ValidationIssueLevel.Warning, warning.Level);
+            Assert.Null(warning.Code);
+            Assert.Equal(memberNames, warning.MemberNames);
+        }
+
+        [Fact]
         public void Warning_Valid() {
 
             // Arrange
 
             var message = "FooBar";
+            var code = "some-code";
             var names = ImmutableHashSet.Create("Foo", "Bar");
 
             // Act
 
             var warning = ValidationIssue.Warning(
                 message,
+                code,
                 names
             );
 
@@ -57,6 +99,7 @@ namespace Invio.Validation {
 
             Assert.Equal(message, warning.Message);
             Assert.Equal(ValidationIssueLevel.Warning, warning.Level);
+            Assert.Equal(code, warning.Code);
             Assert.Equal(names, warning.MemberNames);
         }
 
@@ -89,17 +132,59 @@ namespace Invio.Validation {
         }
 
         [Fact]
+        public void Error_WithJustCode() {
+
+            // Arrange
+
+            var message = "FooBar";
+            var code = "some-code";
+
+            // Act
+
+            var warning = ValidationIssue.Error(message, code);
+
+            // Assert
+
+            Assert.Equal(message, warning.Message);
+            Assert.Equal(ValidationIssueLevel.Error, warning.Level);
+            Assert.Equal(code, warning.Code);
+            Assert.Null(warning.MemberNames);
+        }
+
+        [Fact]
+        public void Error_WithJustMemberNames() {
+
+            // Arrange
+
+            var message = "FooBar";
+            var memberNames = ImmutableHashSet.Create("foo", "bar");
+
+            // Act
+
+            var warning = ValidationIssue.Error(message, memberNames);
+
+            // Assert
+
+            Assert.Equal(message, warning.Message);
+            Assert.Equal(ValidationIssueLevel.Error, warning.Level);
+            Assert.Null(warning.Code);
+            Assert.Equal(memberNames, warning.MemberNames);
+        }
+
+        [Fact]
         public void Error_Valid() {
 
             // Arrange
 
             var message = "FooBar";
+            var code = "bizz buzz barr";
             var names = ImmutableHashSet.Create("Foo", "Bar");
 
             // Act
 
             var warning = ValidationIssue.Error(
                 message,
+                code,
                 names
             );
 
@@ -107,6 +192,7 @@ namespace Invio.Validation {
 
             Assert.Equal(message, warning.Message);
             Assert.Equal(ValidationIssueLevel.Error, warning.Level);
+            Assert.Equal(code, warning.Code);
             Assert.Equal(names, warning.MemberNames);
         }
 
@@ -144,6 +230,7 @@ namespace Invio.Validation {
             // Arrange
 
             var message = "FooBar";
+            var code = "some-error-code";
             var level = ValidationIssueLevel.Error;
             var names = ImmutableHashSet.Create("Foo", "Bar");
 
@@ -151,6 +238,7 @@ namespace Invio.Validation {
 
             var issue = new ValidationIssue(
                 message: message,
+                code: code,
                 level: level,
                 memberNames: names
             );
@@ -158,6 +246,7 @@ namespace Invio.Validation {
             // Assert
 
             Assert.Equal(message, issue.Message);
+            Assert.Equal(code, issue.Code);
             Assert.Equal(level, issue.Level);
             Assert.Equal(names, issue.MemberNames);
         }
@@ -215,6 +304,26 @@ namespace Invio.Validation {
             Assert.Equal("FooBar", updated.Message);
         }
 
+        [Theory]
+        [InlineData(null)]
+        [InlineData("")]
+        [InlineData(" ")]
+        [InlineData("SomeCode")]
+        public void SetCode_AllStringsAreValid(string newCode) {
+
+            // Arrange
+
+            var initial = ValidationIssue.Warning("Bar", "Code?");
+
+            // Act
+
+            var updated = initial.SetCode(newCode);
+
+            // Assert
+
+            Assert.Equal(newCode, updated.Code);
+        }
+
         [Fact]
         public void SetLevel_Valid() {
 
@@ -238,7 +347,7 @@ namespace Invio.Validation {
             // Arrange
 
             var names = ImmutableHashSet.Create("Foo", "Bar");
-            var initial = ValidationIssue.Error("Foo", names);
+            var initial = ValidationIssue.Error("Foo", memberNames: names);
 
             // Act
 
@@ -250,5 +359,7 @@ namespace Invio.Validation {
             Assert.DoesNotContain("Name", initial.MemberNames);
             Assert.Contains("Name", updated.MemberNames);
         }
+
     }
+
 }

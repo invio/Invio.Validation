@@ -13,9 +13,9 @@ namespace Invio.Validation {
             var memberNames = validationResult.MemberNames ?? ImmutableHashSet<String>.Empty;
 
             var issue = new ValidationIssue(
-                validationResult.ErrorMessage,
-                ValidationIssueLevel.Error,
-                memberNames.ToImmutableHashSet()
+                message: validationResult.ErrorMessage,
+                level: ValidationIssueLevel.Error,
+                memberNames: memberNames.ToImmutableHashSet()
             );
 
             return operationResult.AddValidationIssue(issue);

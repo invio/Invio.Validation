@@ -135,7 +135,7 @@ namespace Invio.Validation {
             var message = "Foo is beyond all reason.";
             var names = ImmutableHashSet.Create("Foo", "Bar");
             var issues = ImmutableHashSet.Create(
-                ValidationIssue.Error(message, names)
+                ValidationIssue.Error(message, memberNames: names)
             );
 
             // Act
@@ -157,7 +157,7 @@ namespace Invio.Validation {
             var warningMessage = "What is Kung Fu Fighting?";
             var names = ImmutableHashSet.Create("Foo", "Bar");
             var issues = ImmutableHashSet.Create(
-                ValidationIssue.Error(message, names),
+                ValidationIssue.Error(message, memberNames: names),
                 ValidationIssue.Warning(warningMessage)
             );
 

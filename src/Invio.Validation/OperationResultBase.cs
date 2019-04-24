@@ -12,26 +12,54 @@ namespace Invio.Validation {
         public OperationResultBase(ISet<ValidationIssue> validationIssues)
             : base(validationIssues) { }
 
+        public TExecutionResult AddError(String message) {
+            return this.AddError(message, null, null);
+        }
+
+        public TExecutionResult AddError(String message, String code) {
+            return this.AddError(message, code, null);
+        }
+
+        public TExecutionResult AddError(String message, ISet<String> memberNames) {
+            return this.AddError(message, null, memberNames);
+        }
+
         public TExecutionResult AddError(
             String message,
+            String code = default(String),
             ISet<String> memberNames = default(ImmutableHashSet<String>)) {
 
             return this.AddValidationIssue(
                 ValidationIssue.Error(
-                    message,
-                    memberNames
+                    message: message,
+                    code: code,
+                    memberNames: memberNames
                 )
             );
         }
 
+        public TExecutionResult AddWarning(String message) {
+            return this.AddWarning(message, null, null);
+        }
+
+        public TExecutionResult AddWarning(String message, String code) {
+            return this.AddWarning(message, code, null);
+        }
+
+        public TExecutionResult AddWarning(String message, ISet<String> memberNames) {
+            return this.AddWarning(message, null, memberNames);
+        }
+
         public TExecutionResult AddWarning(
             String message,
+            String code = default(String),
             ISet<String> memberNames = default(ImmutableHashSet<String>)) {
 
             return this.AddValidationIssue(
                 ValidationIssue.Warning(
-                    message,
-                    memberNames
+                    message: message,
+                    code: code,
+                    memberNames: memberNames
                 )
             );
         }

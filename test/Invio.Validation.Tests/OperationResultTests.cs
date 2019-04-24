@@ -398,7 +398,6 @@ namespace Invio.Validation {
             // Assert
 
             Assert.IsType<ArgumentNullException>(exception);
-
         }
 
         [Fact]
@@ -417,7 +416,6 @@ namespace Invio.Validation {
             // Assert
 
             Assert.IsType<ArgumentNullException>(exception);
-
         }
 
         [Fact]
@@ -436,7 +434,6 @@ namespace Invio.Validation {
             // Assert
 
             Assert.IsType<ArgumentException>(exception);
-
         }
 
         [Fact]
@@ -483,7 +480,6 @@ namespace Invio.Validation {
             var issue = ValidationIssue.Warning(message);
             Assert.Contains(issue, updated.ValidationIssues);
             Assert.DoesNotContain(issue, initial.ValidationIssues);
-
         }
 
         [Theory]
@@ -511,7 +507,34 @@ namespace Invio.Validation {
             var issue = ValidationIssue.Warning(message);
             Assert.Contains(issue, updated.ValidationIssues);
             Assert.DoesNotContain(issue, initial.ValidationIssues);
+        }
 
+        [Theory]
+        [InlineData(0)]
+        [InlineData(1)]
+        [InlineData(2)]
+        public void AddWarning_VaryingSetsWithCodes_Generic(
+            int initialNumberOfValidationIssues) {
+
+            // Arrange
+
+            var initialValidationIssues =
+                this.GenerateValidationIssues(initialNumberOfValidationIssues)
+                    .ToImmutableHashSet();
+
+            var message = "FooBar";
+            var code = Guid.NewGuid().ToString("N");
+            var initial = new OperationResult<Object>(initialValidationIssues);
+
+            // Act
+
+            var updated = initial.AddWarning(message, code);
+
+            // Assert
+
+            var issue = ValidationIssue.Warning(message, code);
+            Assert.Contains(issue, updated.ValidationIssues);
+            Assert.DoesNotContain(issue, initial.ValidationIssues);
         }
 
         [Theory]
@@ -533,14 +556,13 @@ namespace Invio.Validation {
 
             // Act
 
-            var updated = initial.AddWarning(message, memberNames);
+            var updated = initial.AddWarning(message, memberNames: memberNames);
 
             // Assert
 
-            var issue = ValidationIssue.Warning(message, memberNames);
+            var issue = ValidationIssue.Warning(message, memberNames: memberNames);
             Assert.Contains(issue, updated.ValidationIssues);
             Assert.DoesNotContain(issue, initial.ValidationIssues);
-
         }
 
         [Theory]
@@ -569,7 +591,6 @@ namespace Invio.Validation {
             var issue = ValidationIssue.Warning(message, memberNames);
             Assert.Contains(issue, updated.ValidationIssues);
             Assert.DoesNotContain(issue, initial.ValidationIssues);
-
         }
 
         [Fact]
@@ -588,7 +609,6 @@ namespace Invio.Validation {
             // Assert
 
             Assert.IsType<ArgumentNullException>(exception);
-
         }
 
         [Fact]
@@ -607,7 +627,6 @@ namespace Invio.Validation {
             // Assert
 
             Assert.IsType<ArgumentNullException>(exception);
-
         }
 
         [Fact]
@@ -626,7 +645,6 @@ namespace Invio.Validation {
             // Assert
 
             Assert.IsType<ArgumentException>(exception);
-
         }
 
         [Fact]
@@ -645,7 +663,6 @@ namespace Invio.Validation {
             // Assert
 
             Assert.IsType<ArgumentException>(exception);
-
         }
 
         [Theory]
@@ -673,7 +690,6 @@ namespace Invio.Validation {
             var issue = ValidationIssue.Error(message);
             Assert.Contains(issue, updated.ValidationIssues);
             Assert.DoesNotContain(issue, initial.ValidationIssues);
-
         }
 
         [Theory]
@@ -701,7 +717,34 @@ namespace Invio.Validation {
             var issue = ValidationIssue.Error(message);
             Assert.Contains(issue, updated.ValidationIssues);
             Assert.DoesNotContain(issue, initial.ValidationIssues);
+        }
 
+        [Theory]
+        [InlineData(0)]
+        [InlineData(1)]
+        [InlineData(2)]
+        public void AddError_VaryingSetsWithCodes_Generic(
+            int initialNumberOfValidationIssues) {
+
+            // Arrange
+
+            var initialValidationIssues =
+                this.GenerateValidationIssues(initialNumberOfValidationIssues)
+                    .ToImmutableHashSet();
+
+            var message = "FooBar";
+            var code = Guid.NewGuid().ToString("N");
+            var initial = new OperationResult<Object>(initialValidationIssues);
+
+            // Act
+
+            var updated = initial.AddError(message, code);
+
+            // Assert
+
+            var issue = ValidationIssue.Error(message, code);
+            Assert.Contains(issue, updated.ValidationIssues);
+            Assert.DoesNotContain(issue, initial.ValidationIssues);
         }
 
         [Theory]
@@ -723,14 +766,13 @@ namespace Invio.Validation {
 
             // Act
 
-            var updated = initial.AddError(message, memberNames);
+            var updated = initial.AddError(message, memberNames: memberNames);
 
             // Assert
 
             var issue = ValidationIssue.Error(message, memberNames);
             Assert.Contains(issue, updated.ValidationIssues);
             Assert.DoesNotContain(issue, initial.ValidationIssues);
-
         }
 
         [Theory]
@@ -759,7 +801,6 @@ namespace Invio.Validation {
             var issue = ValidationIssue.Error(message, memberNames);
             Assert.Contains(issue, updated.ValidationIssues);
             Assert.DoesNotContain(issue, initial.ValidationIssues);
-
         }
 
         private IEnumerable<ValidationIssue> GenerateValidationIssues(int numberOfIssues) {
